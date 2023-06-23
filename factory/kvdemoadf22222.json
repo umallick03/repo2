@@ -1,0 +1,9 @@
+{
+	"name": "kvdemoadf22222",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "cb33f72b-e0d7-4794-a6e9-2c124f57f78b",
+		"tenantId": "e6ec5ce5-2764-4919-8ec3-3218a2898a01"
+	}
+}
