@@ -1,0 +1,48 @@
+{
+	"name": "DelimitedText4",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "sourceblob",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"Finename": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@dataset().Finename",
+					"type": "Expression"
+				},
+				"container": "sourceblob"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Location",
+				"type": "String"
+			},
+			{
+				"name": "Brand_Name",
+				"type": "String"
+			},
+			{
+				"name": "Sales_Count",
+				"type": "String"
+			},
+			{
+				"name": "Revenue",
+				"type": "String"
+			}
+		]
+	}
+}
