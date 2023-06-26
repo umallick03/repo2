@@ -5,11 +5,6 @@
 			"referenceName": "sourceblob",
 			"type": "LinkedServiceReference"
 		},
-		"parameters": {
-			"incr_overlap": {
-				"type": "int"
-			}
-		},
 		"annotations": [],
 		"type": "Json",
 		"typeProperties": {
