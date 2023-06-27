@@ -64,10 +64,7 @@
 					},
 					"dataset": {
 						"referenceName": "lookupconfigds",
-						"type": "DatasetReference",
-						"parameters": {
-							"incr_overlap": "@pipeline().parameters.incr_overlap"
-						}
+						"type": "DatasetReference"
 					},
 					"firstRowOnly": true
 				}
@@ -100,12 +97,6 @@
 				}
 			}
 		],
-		"parameters": {
-			"incr_overlap": {
-				"type": "int",
-				"defaultValue": -24
-			}
-		},
 		"variables": {
 			"derived_incr_value": {
 				"type": "String"
