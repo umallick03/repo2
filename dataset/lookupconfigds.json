@@ -7,7 +7,7 @@
 		},
 		"parameters": {
 			"incr_overlap": {
-				"type": "string"
+				"type": "int"
 			}
 		},
 		"annotations": [],
