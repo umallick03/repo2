@@ -93,7 +93,7 @@
 				"typeProperties": {
 					"variableName": "derived_incr_value",
 					"value": {
-						"value": "@string(addHours(activity('Get Metadata of source blob').output.lastModified,activity('Lookup config file').output.firstRow,'YYYY-MM-DD HH:MM:SS'))",
+						"value": "@string(addHours(activity('Get Metadata of source blob').output.lastModified,-24))",
 						"type": "Expression"
 					}
 				}
