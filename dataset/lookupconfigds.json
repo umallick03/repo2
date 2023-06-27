@@ -1,0 +1,51 @@
+{
+	"name": "lookupconfigds",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "lookupconfigls",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"incr_overlap": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "config.json",
+				"container": "config"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"tables": {
+					"type": "object",
+					"properties": {
+						"servicenow_stg": {
+							"type": "array",
+							"items": {
+								"type": "string"
+							}
+						}
+					}
+				},
+				"target_container": {
+					"type": "string"
+				},
+				"target_dir": {
+					"type": "string"
+				},
+				"schema": {
+					"type": "string"
+				},
+				"incr_overlap": {
+					"type": "integer"
+				}
+			}
+		}
+	}
+}
