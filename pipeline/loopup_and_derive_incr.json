@@ -68,7 +68,8 @@
 						"parameters": {
 							"incr_overlap": "@pipeline().parameters.incr_overlap"
 						}
-					}
+					},
+					"firstRowOnly": true
 				}
 			},
 			{
@@ -93,7 +94,7 @@
 				"typeProperties": {
 					"variableName": "derived_incr_value",
 					"value": {
-						"value": "@string(addHours(activity('Get Metadata of source blob').output.lastModified,-24))",
+						"value": "@string(addHours(activity('Get Metadata of source blob').output.lastModified,activity('Lookup config file').output.firstRow['incr_overlap'],'YYYY-MM-DD HH:MM:SS'))",
 						"type": "Expression"
 					}
 				}
