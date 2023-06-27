@@ -1,0 +1,109 @@
+{
+	"name": "loopup_and_derive_incr",
+	"properties": {
+		"activities": [
+			{
+				"name": "Get Metadata of source blob",
+				"type": "GetMetadata",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "getmetatablobds",
+						"type": "DatasetReference"
+					},
+					"fieldList": [
+						"lastModified"
+					],
+					"storeSettings": {
+						"type": "AzureBlobStorageReadSettings",
+						"enablePartitionDiscovery": false
+					},
+					"formatSettings": {
+						"type": "DelimitedTextReadSettings"
+					}
+				}
+			},
+			{
+				"name": "Lookup config file",
+				"type": "Lookup",
+				"dependsOn": [
+					{
+						"activity": "Get Metadata of source blob",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
+					},
+					"dataset": {
+						"referenceName": "lookupconfigds",
+						"type": "DatasetReference",
+						"parameters": {
+							"incr_overlap": "@pipeline().parameters.incr_overlap"
+						}
+					}
+				}
+			},
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Lookup config file",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "derived_incr_value",
+					"value": {
+						"value": "@string(addHours(activity('Get Metadata of source blob').output.lastModified,activity('Lookup config file').output.firstRow,'YYYY-MM-DD HH:MM:SS'))",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"variables": {
+			"derived_incr_value": {
+				"type": "String"
+			}
+		},
+		"annotations": []
+	}
+}
